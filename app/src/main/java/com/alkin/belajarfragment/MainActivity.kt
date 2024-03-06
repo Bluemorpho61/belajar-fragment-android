@@ -1,0 +1,23 @@
+package com.alkin.belajarfragment
+
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val fragmentManager = supportFragmentManager
+        val homeFragment = HomeFragment()
+        val fragment = fragmentManager.findFragmentByTag(HomeFragment::class.java.simpleName)
+
+        if (fragment !is HomeFragment) {
+            Log.d("tes fragment", "My fragment is: " + HomeFragment::class.java.simpleName)
+            fragmentManager.beginTransaction()
+                .add(R.id.frame_container, homeFragment, HomeFragment::class.java.simpleName)
+                .commit()
+        }
+    }
+}
